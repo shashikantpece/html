@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        form {
+            width: 50%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        select {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        footer {
+            background-color: #f0f0f0;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+       
+    </header>
+    <main>
+        <h1>My form</h1>
+        <form action="mailto:amarpandey8115@gmail.com" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="username">
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="password">
+            <br>
+            <h5>Select class:</h5>
+            <label for="class">
+                <input type="radio" value="class IX" name="class">class IX
+                <input type="radio" value="class X" name="class">class X
+                <br>
+                <input type="radio" value="class XI" name="class">class XI
+                <input type="radio" value="class XII" name="class">class XII
+            </label>
+            <br>
+            <h5>Select favourite subject:</h5>
+            <label for="math">
+                <input type="checkbox" value="math" name="subject" id="101">math
+            </label>
+            <br>
+            <label for="physics">
+                <input type="checkbox" value="phy" name="subject" id="102">physics
+            </label>
+            <br>
+            <label for="chemistry">
+                <input type="checkbox" value="chem" name="subject" id="103">chemistry
+            </label>
+            <br>
+            <label for="social science">
+                <input type="checkbox" value="sst" name="subject" id="104">social science
+            </label>
+            <br>
+            <label for="computer science">
+                <input type="checkbox" value="cs" name="subject" id="105">computer science
+            </label>
+            <br>
+            <label for="city">Select city:</label>
+            <select name="city">
+                <option value="Delhi">Delhi</option>
+                <option value="Banglore">Banglore</option>
+                <option value="Pune">Pune</option>
+                <option value="Lucknow">lucknow</option>
+                <option value="Mumbai">Mumbai</option>
+            </select>
+            <br>
+            <label for="feedback">Feedback:</label>
+            <textarea name="feedback" id="110" placeholder="please give your feedback" rows="4"></textarea>
+            <br>
+            <input type="submit" value="Submit" onclick="alert('Submit
+            .charAt')">
+        </form>
+    </main>
+    <footer>Contact No: 7317674092, Email ID: shashikant_p@ece.iitr.ac.in</footer>
+
+   
+</body>
+</html>

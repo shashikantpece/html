@@ -1,0 +1,30 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    background-color: antiquewhite;
+    display: flex;
+}
+
+#box1{
+    height: 200px;
+    width: 200px;
+    background-color: blue;
+}
+#box2{
+    height: 200px;
+    width: 200px;
+    background-color:brown;
+}
+#box3{
+    height: 200px;
+    width: 200px;
+    background-color:aqua;
+}

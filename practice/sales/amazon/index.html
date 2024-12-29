@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon Clone</title>
+
+  <!-- Include Font Awesome CDN for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      background-image: url('/hero_image.jpg');
+      background-size: cover; /* Ensure the image covers the entire screen */
+      background-position: center; /* Keep the image centered */
+      background-attachment: fixed; /* Make the background fixed during scroll */
+      background-repeat: no-repeat; /* Prevent repeating the background image */
+      color: #333; /* Default text color */
+    }
+
+    /* Header Styles */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(19, 25, 33, 0.8); /* Slightly transparent header */
+      color: white;
+      padding: 10px 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    header .logo img {
+      width: 100px;
+    }
+
+    header .search-bar {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+    }
+
+    header .search-bar input {
+      width: 70%;
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    header .search-bar button {
+      background-color: #ff9900;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    header .search-bar button:hover {
+      background-color: #e68900;
+    }
+
+    header .user-menu {
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+    }
+
+    header .user-menu span {
+      cursor: pointer;
+    }
+
+    header .cart-icon {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    header .cart-icon i {
+      font-size: 24px;
+    }
+
+    header .cart-icon .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: red;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 50%;
+      font-size: 12px;
+    }
+
+    /* Main Content Styles */
+    main {
+      padding: 20px;
+    }
+
+    .product-section {
+      text-align: center;
+    }
+
+    .product-section h2 {
+      margin-bottom: 20px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: white;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .product-card h3 {
+      margin: 10px 0;
+    }
+
+    .product-card p {
+      color: #b12704;
+    }
+
+    /* Footer Styles */
+    footer {
+      text-align: center;
+      background-color: #131921;
+      color: white;
+      padding: 30px 20px;
+      margin-top: 20px;
+    }
+
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    footer .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+
+    footer .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    footer .social-icons {
+      margin-top: 20px;
+    }
+
+    footer .social-icons i {
+      font-size: 24px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+
+    /* Cart Popup Styles */
+    .cart-popup {
+      display: none;
+      position: fixed;
+      margin-right: 10px;
+      top: 20%;
+      right: 5%;
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .cart-popup h3 {
+      margin-bottom: 10px;
+    }
+
+    .cart-popup button {
+      padding: 8px 16px;
+      background-color: #ff9900;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .cart-popup button:hover {
+      background-color: #e68900;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="/amazon_logo.png" alt="Amazon Logo" />
+    </div>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search for products..." />
+      <button onclick="searchProducts()">Search</button>
+    </div>
+    <div class="user-menu">
+      <span><i class="fas fa-globe"></i> Global</span>
+      <span><i class="fas fa-user"></i> Sign In</span>
+    </div>
+
+    <!-- Cart Icon -->
+    <div class="cart-icon" onclick="toggleCartPopup()">
+      <i class="fas fa-shopping-cart"></i>
+      <div class="cart-count" id="cart-count">0</div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="product-section">
+      <h2>Featured Products</h2>
+      <div class="product-grid">
+        <div class="product-card">
+          <img src="/box1_image.jpg" alt="Product 1">
+          <h3>Clothes</h3>
+          <p>$29.99</p>
+          <button onclick="addToCart()">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <img src="/box2_image.jpg" alt="Product 2">
+          <h3>Daily Use Product</h3>
+          <p>$19.99</p>
+          <button onclick="addToCart()">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <img src="/box3_image.jpg" alt="Product 3">
+          <h3>Furnitures</h3>
+          <p>$39.99</p>
+          <button onclick="addToCart()">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <img src="/box5_image.jpg" alt="Product 4">
+          <h3>Fashion Product</h3>
+          <p>$45.99</p>
+          <button onclick="addToCart()">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <img src="/box6_image.jpg" alt="Product 4">
+          <h3>Animal Product</h3>
+          <p>$49.99</p>
+          <button onclick="addToCart()">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <img src="/box7_image.jpg" alt="Product 4">
+          <h3>Stationary Product</h3>
+          <p>$69.99</p>
+          <button onclick="addToCart()">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <img src="/box8_image.jpg" alt="Product 4">
+          <h3>Modern Clothes</h3>
+          <p>$49.99</p>
+          <button onclick="addToCart()">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <img src="/box4_image.jpg" alt="Product 4">
+          <h3>Phone</h3>
+          <p>$459.99</p>
+          <button onclick="addToCart()">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Cart Popup -->
+  <div class="cart-popup" id="cart-popup">
+    <h3>Your Cart</h3>
+    <p>You have <span id="popup-cart-count">0</span> item(s) in your cart.</p>
+    <button onclick="checkout()">Proceed to Checkout</button>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="#">About Us</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact</a>
+      <a href="#">Terms of Service</a>
+    </div>
+    <div class="social-icons">
+      <i class="fab fa-facebook"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-linkedin"></i>
+    </div>
+    <p>&copy; 2024 Amazon Clone | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // JavaScript for the search functionality
+    function searchProducts() {
+      const query = document.getElementById('search-input').value.trim();
+      if (query) {
+        alert('Searching for: ' + query);
+      } else {
+        alert('Please enter a search term');
+      }
+    }
+
+    // JavaScript for cart functionality
+    let cartCount = 0;
+
+    function addToCart() {
+      cartCount++;
+      document.getElementById('cart-count').textContent = cartCount;
+      document.getElementById('popup-cart-count').textContent = cartCount;
+    }
+
+    function toggleCartPopup() {
+      const cartPopup = document.getElementById('cart-popup');
+      if (cartPopup.style.display === 'block') {
+        cartPopup.style.display = 'none';
+      } else {
+        cartPopup.style.display = 'block';
+      }
+    }
+
+    function checkout() {
+      alert('Proceeding to checkout with ' + cartCount + ' item(s) in your cart.');
+    }
+  </script>
+</body>
+</html>
